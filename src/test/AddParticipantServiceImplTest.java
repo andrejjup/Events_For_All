@@ -1,31 +1,36 @@
-package main;
+package test;
+
+import main.*;
+import main.Error;
 
 import java.util.List;
 
-public class AddProductServiceImplTest {
-
+public class AddParticipantServiceImplTest {
     public static void main(String[] args) {
-        shouldFailWhenTitleIsNull();
-        shouldFailWhenDescriptionIsNull();
-        shouldFailWhenQuantityIsZeroOrLess();
+        shouldFailWhenNameIsNull();
+        shouldFailWhenSurnameIsNull();
+        shouldFailWhenPhoneIsNull();
+//        shouldFailWhenEmailIsNull();
+//        shouldFailWhenDescriptionIsNull();
+//        shouldFailWhenQuantityIsZeroOrLess();
     }
 
-    private static void shouldFailWhenTitleIsNull() {
-        AddProductService service = new AddProductServiceImpl();
-        Product product = new Product(null, "description", 1);
-        Response response = service.addProduct(product);
+    private static void shouldFailWhenNameIsNull() {
+        AddParticipantService service = new AddParticipantServiceImpl();
+        Participant participant = new Participant(null, "Ivanov", "22113344", "ok@gmail.com");
+        Response response = service.addParticipant(participant);
 
         if (response.isSuccess() == false) {
-            System.out.println("FailWhenTitleIsNull = OK");
+            System.out.println("FailWhenNameIsNull = OK");
         } else {
-            System.out.println("FailWhenTitleIsNull = FAIL");
+            System.out.println("FailWhenNameIsNull = FAIL");
         }
 
         List<Error> errors = response.getErrors();
         if (errors.size() == 1) {
-            System.out.println("FailWhenTitleIsNull = OK");
+            System.out.println("FailWhenNameIsNull = OK");
         } else {
-            System.out.println("FailWhenTitleIsNull = FAIL");
+            System.out.println("FailWhenNameIsNull = FAIL");
         }
 
         if (errors.get(0).getField().equals("productTitle")) {
@@ -41,10 +46,10 @@ public class AddProductServiceImplTest {
         }
     }
 
-    private static void shouldFailWhenDescriptionIsNull() {
-        AddProductService service = new AddProductServiceImpl();
-        Product product = new Product("Milk", null, 1);
-        Response response = service.addProduct(product);
+    private static void shouldFailWhenSurnameIsNull() {
+        AddParticipantService service = new AddParticipantServiceImpl();
+        Participant participant = new Participant("Vasilij", null, "22113344", "ok@gmail.com");
+        Response response = service.addParticipant(participant);
 
         if (response.isSuccess() == false) {
             System.out.println("FailWhenDescriptionIsNull = OK");
@@ -72,10 +77,10 @@ public class AddProductServiceImplTest {
         }
     }
 
-    private static void shouldFailWhenQuantityIsZeroOrLess() {
-        AddProductService service = new AddProductServiceImpl();
-        Product product = new Product("Milk", "description", 0);
-        Response response = service.addProduct(product);
+    private static void shouldFailWhenPhoneIsNull() {
+        AddParticipantService service = new AddParticipantServiceImpl();
+        Participant participant = new Participant("Vasilij", "Ivanov", "22113344", "ok@gmail.com");
+        Response response = service.addParticipant(participant);
 
         if (response.isSuccess() == false) {
             System.out.println("FailWhenQuantityIsNull = OK");
@@ -102,5 +107,6 @@ public class AddProductServiceImplTest {
             System.out.println("FailWhenQuantityIsNull = FAIL");
         }
     }
+
 
 }
