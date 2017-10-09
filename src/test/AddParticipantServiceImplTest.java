@@ -10,7 +10,7 @@ public class AddParticipantServiceImplTest {
         shouldFailWhenNameIsNull();
         shouldFailWhenSurnameIsNull();
         shouldFailWhenPhoneIsNull();
-//        shouldFailWhenEmailIsNull();
+        shouldFailWhenEmailIsNull();
 //        shouldFailWhenDescriptionIsNull();
 //        shouldFailWhenQuantityIsZeroOrLess();
     }
@@ -107,6 +107,37 @@ public class AddParticipantServiceImplTest {
             System.out.println("FailWhenQuantityIsNull = FAIL");
         }
     }
+    private static void shouldFailWhenEmailIsNull() {
+        AddParticipantService service = new AddParticipantServiceImpl();
+        Participant participant = new Participant(null, "Ivanov", "22113344", "ok@gmail.com");
+        Response response = service.addParticipant(participant);
+
+        if (response.isSuccess() == false) {
+            System.out.println("FailWhenNameIsNull = OK");
+        } else {
+            System.out.println("FailWhenNameIsNull = FAIL");
+        }
+
+        List<Error> errors = response.getErrors();
+        if (errors.size() == 1) {
+            System.out.println("FailWhenNameIsNull = OK");
+        } else {
+            System.out.println("FailWhenNameIsNull = FAIL");
+        }
+
+        if (errors.get(0).getField().equals("productTitle")) {
+            System.out.println("FailWhenTitleIsNull = OK");
+        } else {
+            System.out.println("FailWhenTitleIsNull = FAIL");
+        }
+
+        if (errors.get(0).getErrorMessage().equals("Should not be empty")) {
+            System.out.println("FailWhenTitleIsNull = OK");
+        } else {
+            System.out.println("FailWhenTitleIsNull = FAIL");
+        }
+    }
+
 
 
 }
