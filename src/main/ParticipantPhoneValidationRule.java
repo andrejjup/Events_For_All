@@ -10,4 +10,6 @@ public class ParticipantPhoneValidationRule implements ValidationRule {
         }
     }
 
+
+    //Test message
 }
